@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Generator</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #F5F5F5;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      #container {
+        width: 500px;
+        background-color: #f6f4f4;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      h2 {
+        color: #333333;
+      }
+
+      blockquote {
+        font-size: 24px;
+        line-height: 1.5;
+        color: #555555;
+        min-height: 100px;
+        margin: 20px 0;
+      }
+
+      p {
+        font-size: 18px;
+        color: #888888;
+        margin-bottom: 20px;
+      }
+
+      #button {
+        border: none;
+        border-radius: 5px;
+        background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #button:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Quote Of The Day</h2>
+      <blockquote id="quotes"></blockquote>
+      <p id="author"></p>
+      <button type="button" id="button" onclick="rin()">New Quote</button>
+    </div>
+    <script>
+      let quotes = document.getElementById("quotes");
+      let author = document.getElementById("author");
+      const api_url = "https://api.quotable.io/random";
+
+      async function rin() {
+        const response = await fetch(api_url);
+        var data = await response.json();
+        quotes.innerHTML = data.content;
+        author.innerHTML = `- ${data.author}`;
+      }
+    </script>
+  </body>
+</html>
